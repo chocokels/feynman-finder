@@ -34,10 +34,6 @@
 
 function feyn = FeynmanFinderFunc(ket,bra,graph,eta,heterodyne)
 
-curr.ket = ket;
-curr.bra = bra;
-feyn = {};
-
 if isempty(eta)
     if strcmp(ket,bra) && (heterodyne || ~isempty(predecessors(graph,ket)))
         curr.ket = {ket};
@@ -47,6 +43,7 @@ if isempty(eta)
         feyn = {curr};
     end
 else
+    feyn = {};
     sign = eta(1);
     side = 1;
     if eta(1) == 1
