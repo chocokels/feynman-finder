@@ -41,6 +41,8 @@ if isempty(eta)
         curr.sign = [];
         curr.side = [];
         feyn = {curr};
+    else
+        feyn = {};
     end
 else
     feyn = {};
