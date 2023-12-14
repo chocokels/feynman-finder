@@ -10,8 +10,7 @@
 %               bra and ket.
 %   eta:        Vector array of signs of signal pathways. E.g. [-1 1 1 -1]
 %               for S1.
-%   heterodyne: 0 for photoluminescence, 1 for heterodyne. Note that
-%               heterodyne requires last eta to be -1 to work properly.
+%   heterodyne: 0 for photoluminescence, 1 for heterodyne.
 %
 % Output:
 %   feyn: Cell array of structs. Each index in the cell array corresponds
@@ -48,10 +47,12 @@ else
     feyn = {};
     sign = eta(1);
     side = 1;
-    if eta(1) == 1
+    if eta(1) == -1
+        states = predecessors(graph,ket);
+    elseif (~heterodyne || (size(eta,2) > 1))
         states = successors(graph,ket);
     else
-        states = predecessors(graph,ket);
+        states = [];
     end
     if ~isempty(states)
         for state = 1:length(states)
@@ -68,12 +69,14 @@ else
         end
     end
     side = -1;
-    if eta(1) == -1
+    if eta(1) == 1
+        states = predecessors(graph,bra);
+    elseif (~heterodyne || (size(eta,2) > 1))
         states = successors(graph,bra);
     else
-        states = predecessors(graph,bra);
+        states = [];
     end
-    if ~isempty(states) && (~heterodyne || (size(eta,2) > 1))
+    if ~isempty(states)
         for state = 1:length(states)
             next = FeynmanFinderFunc(ket,states{state},graph,eta(2:end),heterodyne);
             if ~isempty(next)
