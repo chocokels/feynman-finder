@@ -1,8 +1,8 @@
-# October 9, 2020 - Kelsey Bates
+# September 7, 2023 - Kelsey Bates
 
 import networkx as nx
 
-def FeynmanFinderFunc(ket,bra,graph,eta,heterodyne=False):
+def FeynmanFinderFunc(ket,bra,graph,eta,heterodyne=True):
     '''Recursive function to find Feynman diagrams of a system.
     
     Args:
@@ -12,7 +12,7 @@ def FeynmanFinderFunc(ket,bra,graph,eta,heterodyne=False):
                     should point from ground to excited states. The names of the
                     nodes should include the names of the starting bra and ket.
         eta:        List of signs of signal pathways. E.g. [-1,1,1,-1] for S1.
-        heterodyne: True for photoluminescence, False for heterodyne. Note that
+        heterodyne: False for photoluminescence, True for heterodyne. Note that
                     heterodyne requires last eta to be -1 to work properly.
     
     Returns:
