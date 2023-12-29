@@ -55,8 +55,8 @@ if length(ts) == 3
     else
         labs = {'\omega_\tau','\omega_T','\omega_t'};
     end
-    xlabel(labs{axs(1)});
-    ylabel(labs{axs(2)});
+    xlabel(labs{axs(2)});
+    ylabel(labs{axs(1)});
 else
     if ~four
         xlabel(['t_' num2str(ax(2))]);
