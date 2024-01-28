@@ -22,7 +22,7 @@
 %                    the diagonal. Off-diagonal elements represent the
 %                    degree to which those energies are correlated.
 %            sigma:  An array of the inhomogeneous linewidths of the base
-%                    energies. Note that if we turn signma into a diagonal
+%                    energies. Note that if we turn sigma into a diagonal
 %                    matrix, then sigma * rho * sigma should be positive
 %                    definite.
 %            key:    A matrix relating the base energies with the states.
@@ -87,11 +87,11 @@ for i = 1:length(feyn)
     end
 end
 
-    function ires = cellprod(arr)
-        ires = 0;
+    function ires = cellprod(Sigma)
+        ires = zeros(axlen);
         for k = 1:axnum
             for l = 1:axnum
-                ires = ires + ts{k} .* arr(k,l) .* ts{l};
+                ires = ires + ts{k} .* Sigma(k,l) .* ts{l};
             end
         end
     end
